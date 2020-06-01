@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="31">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>63</ID>
+      <Description>"God Mode"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+{$lua}
+LaunchMonoDataCollector()
+{$asm}
+
+alloc(origTakeDamageOpcode, 8)
+registersymbol(origTakeDamageOpcode)
+
+origTakeDamageOpcode:
+  readmem(PlayerHealth:TakeDamage+7, 8)
+
+PlayerHealth:TakeDamage+7:          // Right after the prologue
+  jmp "PlayerHealth:TakeDamage"+1AE // Jump straight to the epilogue
+  db 90 90 90
+
+[DISABLE]
+PlayerHealth:TakeDamage+7:
+  readmem(origTakeDamageOpcode, 8)
+
+dealloc(origTakeDamageOpcode)
+unregistersymbol(origTakeDamageOpcode)
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>64</ID>
+      <Description>"Infinite Ammo"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>define(address, "PlayerShooter:FireSecondary"+8A)
+define(bytes, 8D 65 F8 5E 5F)
+
+[ENABLE]
+{$lua}
+LaunchMonoDataCollector()
+{$asm}
+
+assert(address, bytes)
+alloc(memRefillAmmo, $1000)
+
+label(code)
+label(return)
+
+memRefillAmmo:
+  mov edi, [ebp+08]
+  mov eax, [edi+C0] // C0 holds the current ammo count
+  mov ebx, [edi+B8] // B8 holds the max ammo you can have
+  test eax, eax
+  jne memRefillAmmo+20
+  sub esp, 08
+  push ebx
+  push edi
+  call "PlayerShooter:set_CurrentAmmo"
+  add esp 10
+
+code:
+  lea esp, [ebp-08]
+  pop esi
+  pop edi
+  jmp return
+
+address:
+  jmp memRefillAmmo
+return:
+
+[DISABLE]
+address:
+  // lea esp, [ebp-08]
+  // pop esi
+  // pop edi
+  db bytes
+
+dealloc(memRefillAmmo)
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>62</ID>
+      <Description>"No Hit Slow Movement"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+{$lua}
+LaunchMonoDataCollector()
+{$asm}
+
+alloc(origSlowOpcode, 6)
+registersymbol(origSlowOpcode)
+
+origSlowOpcode:
+  readmem(Player:Slow+6, 6)
+
+Player:Slow+6:
+  fldz
+  db 90 90 90 90
+
+[DISABLE]
+Player:Slow+6:
+  readmem(origSlowOpcode, 6)
+
+dealloc(origSlowOpcode)
+unregistersymbol(origSlowOpcode)
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>65</ID>
+      <Description>"Increase Kill Drop Rate"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+{$lua}
+LaunchMonoDataCollector()
+{$asm}
+
+alloc(origSpwanHpOrAmmoOpcode, 6)
+registersymbol(origSpwanHpOrAmmoOpcode)
+
+label(fNewDropRate)
+registersymbol(fNewDropRate)
+
+origSpwanHpOrAmmoOpcode:
+  readmem(EnemyHealth:SpawnHealthOrAmmo+44, 6)
+
+fNewDropRate:
+  dd (float)45.0 // Lower value means higher drop rate
+                 // Default is 100.0
+
+EnemyHealth:SpawnHealthOrAmmo+44:
+  fld dword ptr [fNewDropRate]
+
+[DISABLE]
+EnemyHealth:SpawnHealthOrAmmo+44:
+  readmem(origSpwanHpOrAmmoOpcode, 6)
+
+dealloc(origSpwanHpOrAmmoOpcode)
+unregistersymbol(origSpwanHpOrAmmoOpcode)
+unregistersymbol(fNewDropRate)
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>
