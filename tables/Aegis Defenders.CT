@@ -2,7 +2,7 @@
 <CheatTable CheatEngineTableVersion="31">
   <CheatEntries>
     <CheatEntry>
-      <ID>2</ID>
+      <ID>0</ID>
       <Description>"Enable Cheat Table"</Description>
       <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
       <LastState Activated="1"/>
@@ -25,7 +25,7 @@ end
 </AssemblerScript>
       <CheatEntries>
         <CheatEntry>
-          <ID>7</ID>
+          <ID>1</ID>
           <Description>"God Mode"</Description>
           <LastState/>
           <VariableType>Auto Assembler Script</VariableType>
@@ -56,7 +56,7 @@ dealloc(memHeroInvincible)
 </AssemblerScript>
         </CheatEntry>
         <CheatEntry>
-          <ID>4</ID>
+          <ID>2</ID>
           <Description>"One Hit Kill"</Description>
           <LastState/>
           <VariableType>Auto Assembler Script</VariableType>
@@ -88,7 +88,7 @@ dealloc(memSetDamageAmount)
 </AssemblerScript>
         </CheatEntry>
         <CheatEntry>
-          <ID>6</ID>
+          <ID>3</ID>
           <Description>"Super Jump"</Description>
           <LastState/>
           <VariableType>Auto Assembler Script</VariableType>
