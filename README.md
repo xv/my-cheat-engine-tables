@@ -1,2 +1,4 @@
-# my-cheat-engine-tables
-A humble repository containing my personal Cheat Engine tables for games that pissed me off and I decided to hack them.
+Game               | Platform
+-------------------|---------
+Aegis Defenders    | [Steam](https://store.steampowered.com/app/371140)
+Escape From Tethys | [Steam](https://store.steampowered.com/app/822540)
