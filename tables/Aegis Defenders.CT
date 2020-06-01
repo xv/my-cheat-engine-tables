@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="31">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>2</ID>
+      <Description>"Enable Cheat Table"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+{$lua}
+if process == "AegisDefenders.exe" and not monopipe then
+    if LaunchMonoDataCollector() == 0 then
+        showMessage("Failed to activate mono features")
+    end
+end
+{$asm}
+
+[DISABLE]
+{$lua}
+if monopipe then
+    monopipe.OnTimeout()
+end
+{$asm}
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>7</ID>
+          <Description>"God Mode"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>define(address, "DestructibleHero:GotTriggerin"+6)
+define(originalBytes, 81 EC 9C 00 00 00)
+
+[ENABLE]
+assert(address, originalBytes)
+alloc(memHeroInvincible, 15)
+
+label(return)
+
+memHeroInvincible:
+  sub esp, 9C
+  jmp "DestructibleHero:GotTriggerin"+4e9
+
+address:
+  jmp memHeroInvincible
+  nop
+return:
+
+[DISABLE]
+address:
+  // sub esp, 0000009C
+  db originalBytes
+
+dealloc(memHeroInvincible)
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>4</ID>
+          <Description>"One Hit Kill"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>define(address, "DestructibleEnemy:TakeDamage"+11a)
+define(originalBytes, 8B 4D 0C F7 D9)
+
+[ENABLE]
+assert(address, originalBytes)
+alloc(memSetDamageAmount, 20)
+
+label(return)
+
+memSetDamageAmount:
+  mov ecx, 3E7 // Deal 999 damage with every hit
+  neg ecx      // Remove this line and you'd add 999 HP ;)
+  jmp return
+
+address:
+  jmp memSetDamageAmount
+return:
+
+[DISABLE]
+address:
+  // mov ecx,[ebp+0C]
+  // neg ecx
+  db originalBytes
+
+dealloc(memSetDamageAmount)
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>6</ID>
+          <Description>"Super Jump"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>define(address, "Hero:Jump"+b9)
+define(originalBytes, 83 C4 0C D9 45 0C)
+
+[ENABLE]
+assert(address, originalBytes)
+alloc(memNewJumpValue, 20)
+
+label(return)
+
+memNewJumpValue:
+  add esp, 0C
+  mov [ebp+0C], (float)30.0 // Game default is ~18.0
+  fld dword ptr [ebp+0C]
+  jmp return
+
+address:
+  jmp memNewJumpValue
+  nop
+return:
+
+[DISABLE]
+address:
+  // add esp, 0C
+  // fld dword ptr [ebp+0C]
+  db originalBytes
+
+dealloc(memNewJumpValue)
+</AssemblerScript>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>
