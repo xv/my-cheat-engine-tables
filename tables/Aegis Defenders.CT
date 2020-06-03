@@ -5,7 +5,7 @@
       <ID>0</ID>
       <Description>"Enable Cheat Table"</Description>
       <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
-      <LastState Activated="1"/>
+      <LastState/>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript>[ENABLE]
 {$lua}
@@ -119,6 +119,52 @@ address:
   db originalBytes
 
 dealloc(memNewJumpValue)
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>8</ID>
+          <Description>"Infinite Offensive Resource (Blue)"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>define(address, "HeroBuildArea:UpdateCanAffordItem"+8e)
+define(originalBytes, C6 80 AC 00 00 00 00)
+
+[ENABLE]
+assert(address, originalBytes)
+alloc(memInfiniteResOffensive, 100)
+
+label(return)
+
+memInfiniteResOffensive:
+  mov byte ptr [eax+000000AC], 1 // canAffordItem = true
+  ///////////////////////////////////////
+  // Get resource wallet size first from
+  // instance.currentGameData.walletSize
+  ///////////////////////////////////////
+  cmp [esi],esi
+  mov eax, [esi+34]
+  mov ecx, [eax+54]
+
+  sub esp, 04
+  push ecx // Max refill
+  push 1
+  push esi
+  cmp [esi], esi
+  call "DataManager:SetResourceAmount"
+  add esp, 10
+  jmp return
+
+address:
+  jmp memInfiniteResOffensive
+  nop 2
+return:
+
+[DISABLE]
+address:
+  // mov byte ptr [eax+000000AC], 00
+  db originalBytes
+
+dealloc(memInfiniteResOffensive)
 </AssemblerScript>
         </CheatEntry>
       </CheatEntries>
