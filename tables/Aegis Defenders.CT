@@ -199,6 +199,38 @@ address:
 dealloc(memFreezeFragilePlatform)
 </AssemblerScript>
         </CheatEntry>
+        <CheatEntry>
+          <ID>6</ID>
+          <Description>"Freeze Manned Turret Stamina"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>define(address, "TurretControl:SpendStamina"+4)
+define(originalBytes, 83 EC 04 8B 7D 08)
+
+[ENABLE]
+assert(address, originalBytes)
+alloc(memFreezeTurretStamina, 15)
+
+label(return)
+
+memFreezeTurretStamina:
+  sub esp, 04
+  jmp "TurretControl:SpendStamina"+be
+
+address:
+  jmp memFreezeTurretStamina
+  nop
+return:
+
+[DISABLE]
+address:
+  // sub esp, 04
+  // mov edi, [ebp+08]
+  db originalBytes
+
+dealloc(memFreezeTurretStamina)
+</AssemblerScript>
+        </CheatEntry>
       </CheatEntries>
     </CheatEntry>
   </CheatEntries>
