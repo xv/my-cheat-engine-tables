@@ -123,7 +123,7 @@ dealloc(memNewJumpValue)
         </CheatEntry>
         <CheatEntry>
           <ID>4</ID>
-          <Description>"Infinite Offensive Resource (Blue)"</Description>
+          <Description>"Infinite Building Resources"</Description>
           <LastState/>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>define(address, "HeroBuildArea:UpdateCanAffordItem"+8e)
@@ -131,23 +131,59 @@ define(originalBytes, C6 80 AC 00 00 00 00)
 
 [ENABLE]
 assert(address, originalBytes)
-alloc(memInfiniteResOffensive, 100)
+alloc(memInfiniteBuildRes, 200)
+
+label(checkHeroBart)
+label(checkHeroClu)
+label(checkHeroKaiim)
+label(checkHeroZula)
+label(setResAmount)
 
 label(return)
 
-memInfiniteResOffensive:
+memInfiniteBuildRes:
   mov byte ptr [eax+000000AC], 1 // canAffordItem = true
+  ///////////////////////////////////////
+  // Get the current hero index to decide
+  // what resource to refill
+  //     Bart  = 1
+  //     Clu   = 2
+  //     Kaiim = 5
+  //     Zula  = 6
+  ///////////////////////////////////////
+  mov eax, [eax+40]
+  mov eax, [eax+000001C8]
   ///////////////////////////////////////
   // Get resource wallet size first from
   // instance.currentGameData.walletSize
   ///////////////////////////////////////
-  cmp [esi],esi
-  mov eax, [esi+34]
-  mov ecx, [eax+54]
+  cmp [esi], esi
+  mov ebx, [esi+34]
+  mov ecx, [ebx+54]
 
+checkHeroBart:
+  cmp eax, 1
+  jne checkHeroClu
+  mov ebx, 0 // RESOURCE_DEFENSE
+  jmp setResAmount
+checkHeroClu:
+  cmp eax, 2
+  jne checkHeroKaiim
+  mov ebx, 1 // RESOURCE_OFFENSE
+  jmp setResAmount
+checkHeroKaiim:
+  cmp eax, 5
+  jne checkHeroZula
+  mov ebx, 6 // RESOURCE_BLUE
+  jmp setResAmount
+checkHeroZula:
+  cmp eax, 6
+  jne setResAmount
+  mov ebx, 7 // RESOURCE_PURPLE
+setResAmount:
   sub esp, 04
-  push ecx // Max refill
-  push 1
+  push ecx // Refill amount
+  push ebx // Resource type
   push esi
   cmp [esi], esi
   call "DataManager:SetResourceAmount"
@@ -155,7 +191,7 @@ memInfiniteResOffensive:
   jmp return
 
 address:
-  jmp memInfiniteResOffensive
+  jmp memInfiniteBuildRes
   nop 2
 return:
 
@@ -164,7 +200,7 @@ address:
   // mov byte ptr [eax+000000AC], 00
   db originalBytes
 
-dealloc(memInfiniteResOffensive)
+dealloc(memInfiniteBuildRes)
 </AssemblerScript>
         </CheatEntry>
         <CheatEntry>
