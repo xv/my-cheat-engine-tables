@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="31">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>6</ID>
+      <Description>"Score"</Description>
+      <LastState Value="144.6589508" RealAddress="2A60FF74"/>
+      <VariableType>Float</VariableType>
+      <Address>"UnityPlayer.dll"+01177640</Address>
+      <Offsets>
+        <Offset>3A4</Offset>
+        <Offset>38</Offset>
+        <Offset>38</Offset>
+        <Offset>4</Offset>
+        <Offset>84</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>3</ID>
+      <Description>"Distance"</Description>
+      <LastState Value="1.350198627" RealAddress="2A60FF88"/>
+      <VariableType>Float</VariableType>
+      <Address>"UnityPlayer.dll"+01177640</Address>
+      <Offsets>
+        <Offset>3B8</Offset>
+        <Offset>38</Offset>
+        <Offset>38</Offset>
+        <Offset>4</Offset>
+        <Offset>84</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>11</ID>
+      <Description>"High Speed"</Description>
+      <LastState Value="0" RealAddress="2A60FF8C"/>
+      <VariableType>Float</VariableType>
+      <Address>"UnityPlayer.dll"+01177640</Address>
+      <Offsets>
+        <Offset>3BC</Offset>
+        <Offset>38</Offset>
+        <Offset>38</Offset>
+        <Offset>4</Offset>
+        <Offset>84</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>13</ID>
+      <Description>"Time Left (Time Attack mode)"</Description>
+      <LastState Value="50" RealAddress="2A60FF78"/>
+      <VariableType>Float</VariableType>
+      <Address>"UnityPlayer.dll"+01177640</Address>
+      <Offsets>
+        <Offset>3A8</Offset>
+        <Offset>38</Offset>
+        <Offset>38</Offset>
+        <Offset>4</Offset>
+        <Offset>84</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>14</ID>
+      <Description>"Bomb Health (Speed Bomb mode)"</Description>
+      <LastState Value="79.75788879" RealAddress="2A60FFB4"/>
+      <VariableType>Float</VariableType>
+      <Address>"UnityPlayer.dll"+01177640</Address>
+      <Offsets>
+        <Offset>3E4</Offset>
+        <Offset>38</Offset>
+        <Offset>38</Offset>
+        <Offset>4</Offset>
+        <Offset>84</Offset>
+      </Offsets>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>
