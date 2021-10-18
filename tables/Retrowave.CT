@@ -4,7 +4,6 @@
     <CheatEntry>
       <ID>6</ID>
       <Description>"Score"</Description>
-      <LastState Value="0" RealAddress="2A66FF74"/>
       <VariableType>Float</VariableType>
       <Address>"UnityPlayer.dll"+01177640</Address>
       <Offsets>
@@ -18,7 +17,6 @@
     <CheatEntry>
       <ID>3</ID>
       <Description>"Distance"</Description>
-      <LastState Value="0" RealAddress="2A66FF88"/>
       <VariableType>Float</VariableType>
       <Address>"UnityPlayer.dll"+01177640</Address>
       <Offsets>
@@ -32,7 +30,6 @@
     <CheatEntry>
       <ID>11</ID>
       <Description>"High Speed"</Description>
-      <LastState Value="0" RealAddress="2A66FF8C"/>
       <VariableType>Float</VariableType>
       <Address>"UnityPlayer.dll"+01177640</Address>
       <Offsets>
@@ -44,9 +41,21 @@
       </Offsets>
     </CheatEntry>
     <CheatEntry>
+      <ID>16</ID>
+      <Description>"Near Miss"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>"UnityPlayer.dll"+01177640</Address>
+      <Offsets>
+        <Offset>3D8</Offset>
+        <Offset>38</Offset>
+        <Offset>38</Offset>
+        <Offset>4</Offset>
+        <Offset>84</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
       <ID>13</ID>
       <Description>"Time Left (Time Attack mode)"</Description>
-      <LastState Value="100" RealAddress="2A66FF78"/>
       <VariableType>Float</VariableType>
       <Address>"UnityPlayer.dll"+01177640</Address>
       <Offsets>
@@ -60,7 +69,6 @@
     <CheatEntry>
       <ID>14</ID>
       <Description>"Bomb Health (Speed Bomb mode)"</Description>
-      <LastState Value="100" RealAddress="2A66FFB4"/>
       <VariableType>Float</VariableType>
       <Address>"UnityPlayer.dll"+01177640</Address>
       <Offsets>
