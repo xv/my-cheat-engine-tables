@@ -41,12 +41,12 @@
       </Offsets>
     </CheatEntry>
     <CheatEntry>
-      <ID>16</ID>
-      <Description>"Near Miss"</Description>
-      <VariableType>4 Bytes</VariableType>
+      <ID>17</ID>
+      <Description>"Wrong Way (Two Way mode)"</Description>
+      <VariableType>Float</VariableType>
       <Address>"UnityPlayer.dll"+01177640</Address>
       <Offsets>
-        <Offset>3D8</Offset>
+        <Offset>3C4</Offset>
         <Offset>38</Offset>
         <Offset>38</Offset>
         <Offset>4</Offset>
@@ -73,6 +73,19 @@
       <Address>"UnityPlayer.dll"+01177640</Address>
       <Offsets>
         <Offset>3E4</Offset>
+        <Offset>38</Offset>
+        <Offset>38</Offset>
+        <Offset>4</Offset>
+        <Offset>84</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>16</ID>
+      <Description>"Near Miss"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>"UnityPlayer.dll"+01177640</Address>
+      <Offsets>
+        <Offset>3D8</Offset>
         <Offset>38</Offset>
         <Offset>38</Offset>
         <Offset>4</Offset>
